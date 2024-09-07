@@ -1,0 +1,17 @@
+1 Execute 
+            "conda --version" in a bash console
+
+2. Execute 
+            1. ".\env\Scripts\activate" in a CMD or PowerShell console
+            2. "source env/Scripts/activate" in a Git Bash or py console
+
+to activate
+
+3. Edit/Use/Delete the environment
+
+(3.5  you can press Ctrl + Shift + P and type Python: Restart Language Server to restart the interpreter)
+
+
+4. to deactivate the environment Execute
+                                          "deactivate" in a Git Bash console
+                                          "deactivate" in a CMD or PowerShell console

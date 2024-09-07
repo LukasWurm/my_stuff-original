@@ -1,0 +1,38 @@
+from transformers import pipeline, AutoModelForSequenceClassification, AutoTokenizer
+
+# -------------------------
+# Sentimentanalyse mit vortrainiertem Modell
+# -------------------------
+
+# Pipeline für Sentimentanalyse erstellen
+classifier = pipeline('sentiment-analysis')
+
+# Text analysieren
+result = classifier('I love machine learning!')[0]
+print(f"Label: {result['label']}, Score: {result['score']}")  # Ausgabe: Label und Score
+
+# -------------------------
+# Eigene Texte mit GPT-2 generieren
+# -------------------------
+
+# Textgenerierungsmodell laden
+generator = pipeline('text-generation', model='gpt2')
+
+# Text generieren
+output = generator("Once upon a time", max_length=50, num_return_sequences=1)
+print(output[0]['generated_text'])  # Ausgabe des generierten Textes
+
+# -------------------------
+# Textklassifizierung mit eigenem Modell
+# -------------------------
+
+# Modell und Tokenizer laden
+model = AutoModelForSequenceClassification.from_pretrained('distilbert-base-uncased-finetuned-sst-2-english')
+tokenizer = AutoTokenizer.from_pretrained('distilbert-base-uncased-finetuned-sst-2-english')
+
+# Text vorbereiten
+inputs = tokenizer("I love programming!", return_tensors="pt")
+
+# Vorhersage machen
+outputs = model(**inputs)
+print(outputs.logits)  # Ausgabe der Rohwerte der Klassifikation
